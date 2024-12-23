@@ -1,0 +1,35 @@
+{
+  "name": "React/Next.js with pnpm",
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+    "service": "app",
+    "workspaceFolder": "/workspaces/arch-ph-ui-web",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "dbaeumer.vscode-eslint",
+            "esbenp.prettier-vscode",
+            "ms-azuretools.vscode-docker"
+        ],
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "bash",
+          "editor.formatOnSave": true
+        }
+      }
+    },
+    "postCreateCommand": "pnpm install",
+    "remoteUser": "root",
+    "portsAttributes": {
+      "3000": {
+        "label": "Next.js Dev Server",
+        "onAutoForward": "openPreview"
+      }
+    },
+    "forwardPorts": [3000],
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/workspaces/arch-ph-ui-web,type=bind"
+    ]
+  }
+  
