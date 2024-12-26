@@ -1,19 +1,18 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Run pnpm dev",
-        "type": "node",
-        "request": "launch",
-        "skipFiles": ["<node_internals>/**"],
-        "runtimeExecutable": "pnpm",
-        "runtimeArgs": ["dev"],
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "NODE_ENV": "development"
-        },
-        "console": "integratedTerminal"
-      }
-    ]
-  }
-  
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run pnpm dev",
+      "type": "node",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+      },
+      "console": "integratedTerminal"
+    }
+  ]
+}
