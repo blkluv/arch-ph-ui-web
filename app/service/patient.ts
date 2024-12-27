@@ -1,6 +1,6 @@
 import { apiRequest } from '../lib/api-client';
 
-interface PatientAttributes {
+export interface PatientAttributes {
     clinic_id: string;
     last_name: string;
     first_name: string;
@@ -72,5 +72,21 @@ export async function searchPatients(params: SearchPatientsParams): Promise<{ pa
     return {
         patients: response.data,
         pagination: response.meta.pagination,
+    };
+}
+
+// Create a patient with the provided parameters
+export async function createPatient(params: PatientAttributes): Promise<{patient: Patient, message: string}> {
+    const url = `${BASE_URL}/patient`; // Endpoint for creating a patient
+    debugger;
+    const response = await apiRequest<ApiResponse>(url, 
+        { 
+            method: 'POST',
+            body: JSON.stringify(params),
+        });
+
+    return {
+        patient: response.data[0],
+        message: response.meta.message,
     };
 }

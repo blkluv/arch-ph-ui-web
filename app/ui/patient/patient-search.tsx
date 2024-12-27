@@ -1,8 +1,7 @@
 'use client'; // Mark this file as a client component
 
-import { useState, useEffect } from 'react';
-import { searchPatients } from '../../service/patient'; // Import the searchPatients function
-import { Patient } from '../../service/patient'; // Import the Patient type
+import { useState } from 'react';
+import { searchPatients, Patient } from '../../service/patient'; 
 
 const PatientSearch = () => {
   const [patients, setPatients] = useState<Patient[]>([]);

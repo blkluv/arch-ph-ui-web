@@ -10,7 +10,7 @@ const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
   {
     name: 'Patients',
-    href: '/patient',
+    href: '/patient/search',
     icon: UserGroupIcon,
   },
   { name: 'Reports', href: '/reports', icon: DocumentDuplicateIcon },
