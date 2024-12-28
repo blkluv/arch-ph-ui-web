@@ -1,4 +1,3 @@
-// apiClient.ts
 export interface ApiRequestOptions extends RequestInit {
     headers?: Record<string, string>;
     body?: string;
@@ -32,7 +31,6 @@ export async function apiRequest<T>(url: string, options: ApiRequestOptions = {}
 
         return (await response.json()) as T;
     } catch (error) {
-        //console.error('API Request Error:', (error as Error).message);
         throw error;
     }
 }

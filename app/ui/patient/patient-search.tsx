@@ -18,6 +18,7 @@ const PatientSearch = () => {
   const fetchPatients = async (searchParams: { firstname: string; lastname: string }) => {
     setLoading(true);
     try {
+      debugger;
       const { patients, pagination: newPagination } = await searchPatients({
         firstname: searchParams.firstname,
         lastname: searchParams.lastname,
@@ -27,8 +28,13 @@ const PatientSearch = () => {
       setPatients(patients);
       setPagination(newPagination);
     } catch (error) {
-      console.error('Error fetching patients:', error);
       setPatients([]);
+      setPagination({
+        page: 1,
+        page_size: 10,
+        total_count: 0,
+        total_pages: 1,
+      });
     } finally {
       setLoading(false);
     }

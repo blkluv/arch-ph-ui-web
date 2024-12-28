@@ -38,6 +38,10 @@ const patientSchema = z.object({
 type PatientFormData = z.infer<typeof patientSchema>;
 
 const CreatePatientForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null); 
+  const [success, setSuccess] = useState<string | null>(null); 
+
   const [birthdate, setBirthdate] = useState<Date | null>(null);
   const {
     register,
@@ -48,30 +52,39 @@ const CreatePatientForm = () => {
     resolver: zodResolver(patientSchema),
   });
 
-  const onSubmit = async (data: PatientFormData) => {
-    
-    
 
-    const newPatient: PatientAttributes = {
-      ...data,
-      birthdate: birthdate?.toISOString() || "",
-      middle_name: data.middle_name || "",
-      nick_name: data.nick_name || "",
-      home_phone: data.home_phone || "",
-      office_phone: data.office_phone || "",
-      mobile_phone: data.mobile_phone || "",
-      email_address: data.email_address || "",
-      fax_number: data.fax_number || "",
-      zip_code: data.zip_code || "",
-      occupation: data.occupation || "",
-      dental_insurance: data.dental_insurance || "",
-      guardian_name: data.guardian_name || "",
-      guardian_occupation: data.guardian_occupation || "",
-      referrer: data.referrer || "",
-      clinic_id: data.clinic_id || "",
-    };
-    const response = await createPatient(newPatient);
-    console.log(response.message);
+  const onSubmit = async (data: PatientFormData) => {
+    try {
+
+      setLoading(true);
+      setError(null); 
+      setSuccess(null); 
+
+      const newPatient: PatientAttributes = {
+        ...data,
+        birthdate: birthdate?.toISOString() || "",
+        middle_name: data.middle_name || "",
+        nick_name: data.nick_name || "",
+        home_phone: data.home_phone || "",
+        office_phone: data.office_phone || "",
+        mobile_phone: data.mobile_phone || "",
+        email_address: data.email_address || "",
+        fax_number: data.fax_number || "",
+        zip_code: data.zip_code || "",
+        occupation: data.occupation || "",
+        dental_insurance: data.dental_insurance || "",
+        guardian_name: data.guardian_name || "",
+        guardian_occupation: data.guardian_occupation || "",
+        referrer: data.referrer || "",
+        clinic_id: data.clinic_id || "",
+      };
+      const response = await createPatient(newPatient);
+      console.log(response.message);
+    } catch (error) {
+      setError((error as Error).message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

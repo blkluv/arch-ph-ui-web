@@ -1,4 +1,5 @@
 import { apiRequest } from '../lib/api-client';
+import { ApiResponse, PaginationMeta } from '../models/base-response';
 
 export interface PatientAttributes {
     clinic_id: string;
@@ -31,21 +32,6 @@ export interface Patient {
     attributes: PatientAttributes;
 }
 
-interface PaginationMeta {
-    page: number;
-    page_size: number;
-    total_count: number;
-    total_pages: number;
-}
-
-interface ApiResponse {
-    data: Patient[];
-    meta: {
-        message: string;
-        pagination: PaginationMeta;
-    };
-}
-
 interface SearchPatientsParams {
     firstname: string;
     lastname: string;
@@ -66,7 +52,7 @@ export async function searchPatients(params: SearchPatientsParams): Promise<{ pa
     const url = `${BASE_URL}/patient/search?firstname=${firstname}&lastname=${lastname}&page=${page}&page_size=${page_size}`;
 
     // Fetch the API response with the specified URL
-    const response = await apiRequest<ApiResponse>(url, { method: 'GET' });
+    const response = await apiRequest<ApiResponse<Patient[]>>(url, { method: 'GET' });
 
     // Return the patients and pagination metadata
     return {
@@ -79,7 +65,7 @@ export async function searchPatients(params: SearchPatientsParams): Promise<{ pa
 export async function createPatient(params: PatientAttributes): Promise<{patient: Patient, message: string}> {
     const url = `${BASE_URL}/patient`; // Endpoint for creating a patient
     debugger;
-    const response = await apiRequest<ApiResponse>(url, 
+    const response = await apiRequest<ApiResponse<Patient[]>>(url, 
         { 
             method: 'POST',
             body: JSON.stringify(params),
