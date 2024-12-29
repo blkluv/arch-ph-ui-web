@@ -37,7 +37,11 @@ const patientSchema = z.object({
 
 type PatientFormData = z.infer<typeof patientSchema>;
 
-const CreatePatientForm = () => {
+type CreatePatientFormProps = {
+  onSuccess: (patientId: number) => void; 
+};
+
+const CreatePatientForm = ({ onSuccess }: CreatePatientFormProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null); 
   const [success, setSuccess] = useState<string | null>(null); 
@@ -79,6 +83,9 @@ const CreatePatientForm = () => {
         clinic_id: data.clinic_id || "",
       };
       const response = await createPatient(newPatient);
+      if (response.patient) {
+        onSuccess(response.patient.id);
+      }
       console.log(response.message);
     } catch (error) {
       setError((error as Error).message);
@@ -392,7 +399,7 @@ const CreatePatientForm = () => {
           id="btn-create-patient"
           className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
-          Create Patient
+          Save & Next (Dental History)
         </button>
       </div>
     </form>

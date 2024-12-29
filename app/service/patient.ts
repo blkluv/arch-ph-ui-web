@@ -1,5 +1,8 @@
 import { apiRequest } from '../lib/api-client';
 import { ApiResponse, PaginationMeta } from '../models/base-response';
+import { getBaseUrl } from "@/utils/config";
+
+const BASE_URL = getBaseUrl();
 
 export interface PatientAttributes {
     clinic_id: string;
@@ -28,7 +31,7 @@ export interface PatientAttributes {
 }
 
 export interface Patient {
-    id: string;
+    id: number;
     attributes: PatientAttributes;
 }
 
@@ -37,13 +40,6 @@ interface SearchPatientsParams {
     lastname: string;
     page: number;
     page_size: number;
-}
-
-// Get the base URL dynamically from environment variables
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-if (!BASE_URL) {
-    throw new Error("API base URL is not defined in the environment configuration.");
 }
 
 // Fetch patients with search parameters
@@ -64,7 +60,6 @@ export async function searchPatients(params: SearchPatientsParams): Promise<{ pa
 // Create a patient with the provided parameters
 export async function createPatient(params: PatientAttributes): Promise<{patient: Patient, message: string}> {
     const url = `${BASE_URL}/patient`; // Endpoint for creating a patient
-    debugger;
     const response = await apiRequest<ApiResponse<Patient[]>>(url, 
         { 
             method: 'POST',

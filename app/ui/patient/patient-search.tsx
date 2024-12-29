@@ -18,7 +18,7 @@ const PatientSearch = () => {
   const fetchPatients = async (searchParams: { firstname: string; lastname: string }) => {
     setLoading(true);
     try {
-      debugger;
+
       const { patients, pagination: newPagination } = await searchPatients({
         firstname: searchParams.firstname,
         lastname: searchParams.lastname,

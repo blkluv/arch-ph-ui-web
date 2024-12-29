@@ -1,8 +1,8 @@
 "use client"
 
-import "@/app/ui/global.css";
-import { inter } from "@/app/ui/fonts";
-import SideNav from "@/app/ui/dashboard/sidenav";
+import "@/ui/global.css";
+import { inter } from "@/ui/fonts";
+import SideNav from "@/ui/dashboard/sidenav";
 import { useEffect } from "react";
 
 export default function RootLayout({
