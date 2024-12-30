@@ -1,10 +1,8 @@
 import { apiRequest } from '../lib/api-client';
-import { ApiResponse, PaginationMeta } from '../models/base-response';
+import { ApiResponse } from '../models/base-response';
 import { getBaseUrl } from "@/utils/config";
 
 const BASE_URL = getBaseUrl();
-
-// Use BASE_URL as needed
 
 export interface DentalHistoryAttributes {
     clinic_id: string;
@@ -15,7 +13,7 @@ export interface DentalHistoryAttributes {
 }
 
 export interface DentalHistory {
-    id: string;
+    id: number;
     attributes: DentalHistoryAttributes;
 }
 
@@ -40,7 +38,7 @@ export async function searchDentalHistory(params: SearchDentalHistoryParams): Pr
 
 // Create a patient with the provided parameters
 export async function createDentalHistory(params: DentalHistoryAttributes): Promise<{dentalHistory: DentalHistory, message: string}> {
-    const url = `${BASE_URL}/dental_history`; // Endpoint for creating a patient
+    const url = `${BASE_URL}/dental_history`; 
     const response = await apiRequest<ApiResponse<DentalHistory[]>>(url, 
         { 
             method: 'POST',

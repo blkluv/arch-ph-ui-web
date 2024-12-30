@@ -5,6 +5,7 @@ export interface ApiRequestOptions extends RequestInit {
 
 export async function apiRequest<T>(url: string, options: ApiRequestOptions = {}): Promise<T> {
     try {
+        debugger;
         const clinicId = sessionStorage.getItem("clinic-id");
         const defaultHeaders = {
             'Content-Type': 'application/json',
